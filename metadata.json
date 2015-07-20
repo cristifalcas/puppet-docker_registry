@@ -1,0 +1,38 @@
+{
+	"author": "Cristian Falcas",
+	"version": "0.9.4",
+	"name": "optymyzepuppet-docker_registry",
+	"dependencies": [
+		{
+			"name": "puppetlabs/stdlib",
+			"version_requirement": "4.x"
+		},
+		{
+			"name": "puppetlabs/concat",
+			"version_requirement": "1.x"
+		},
+		{
+			"name": "puppetlabs/firewall",
+			"version_requirement": "1.x"
+		},
+		{
+			"name": "puppetlabs/apache",
+			"version_requirement": "1.x"
+		},
+		{
+			"name": "jfryman/nginx",
+			"version_requirement": "0.x"
+		},
+		{
+			"name": "leinaddm/htpasswd",
+			"version_requirement": "0.x"
+		}
+	],
+	"license": "optymyze",
+	"operatingsystem_support": [],
+	"project_page": "https://v-git-op-01.optymyze.net/pp_management/docker_registry",
+	"requirements": [],
+	"source": "git@v-git-op-01.optymyze.net:pp_management/docker_registry.git",
+	"summary": "installs and configures docker registryu",
+	"tags": []
+}

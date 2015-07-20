@@ -1,0 +1,6 @@
+
+<%= scope.function_template(['docker_registry/storage/__header.erb']) %>
+    azure_storage_account_name: _env:AZURE_STORAGE_ACCOUNT_NAME<% if defined?@storage_account_name then -%>:<%= @storage_account_name %><% end %>
+    azure_storage_account_key: _env:AZURE_STORAGE_ACCOUNT_KEY<% if defined?@storage_account_key then -%>:<%= @storage_account_key %><% end %>
+    azure_storage_container: _env:AZURE_STORAGE_CONTAINER<% if defined?@storage_container then -%>:<%= @storage_container %><% end %>
+    azure_use_https: _env:AZURE_USE_HTTPS<% if defined?@use_https then -%>:<%= @use_https %><% end %>

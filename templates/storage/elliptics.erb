@@ -1,0 +1,12 @@
+
+<%= scope.function_template(['docker_registry/storage/__header.erb']) %>
+    elliptics_nodes: _env:ELLIPTICS_NODES<% if defined?@nodes then -%>:<%= @nodes %><% end %>
+    elliptics_wait_timeout: _env:ELLIPTICS_WAIT_TIMEOUT<% if defined?@wait_timeout then -%>:<%= @wait_timeout %><% end %>
+    elliptics_check_timeout: _env:ELLIPTICS_CHECK_TIMEOUT<% if defined?@check_timeout then -%>:<%= @check_timeout %><% end %>
+    elliptics_io_thread_num: _env:ELLIPTICS_IO_THREAD_NUM<% if defined?@io_thread_num then -%>:<%= @io_thread_num %><% end %>
+    elliptics_net_thread_num: _env:ELLIPTICS_NET_THREAD_NUM<% if defined?@net_thread_num then -%>:<%= @net_thread_num %><% end %>
+    elliptics_nonblocking_io_thread_num: _env:ELLIPTICS_NONBLOCKING_IO_THREAD_NUM<% if defined?@nonblocking_io_thread_num then -%>:<%= @nonblocking_io_thread_num %><% end %>
+    elliptics_groups: _env:ELLIPTICS_GROUPS<% if defined?@groups then -%>:<%= @groups %><% end %>
+    elliptics_verbosity: _env:ELLIPTICS_VERBOSITY<% if defined?@verbosity then -%>:<%= @verbosity %><% end %>
+    elliptics_logfile: _env:ELLIPTICS_LOGFILE<% if defined?@logfile then -%>:<%= @logfile %><% end %>
+    elliptics_addr_family: _env:ELLIPTICS_ADDR_FAMILY<% if defined?@addr_family then -%>:<%= @addr_family %><% end %>

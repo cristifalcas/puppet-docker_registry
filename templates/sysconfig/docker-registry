@@ -1,0 +1,14 @@
+# The Docker registry configuration file
+DOCKER_REGISTRY_CONFIG=/etc/docker-registry.yml
+
+# The configuration to use from DOCKER_REGISTRY_CONFIG file
+SETTINGS_FLAVOR=<%= scope['docker_registry::default_flavor'] %>
+
+# Address to bind the registry to
+REGISTRY_ADDRESS=<%= scope['docker_registry::adress'] %>
+
+# Port to bind the registry to
+REGISTRY_PORT=<%= scope['docker_registry::port'] %>
+
+# Number of workers to handle the connections
+GUNICORN_WORKERS=<%= scope['docker_registry::nr_threads'] %>

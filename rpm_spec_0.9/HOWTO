@@ -1,0 +1,7 @@
+yum install -y yum-utils rpmdevtools
+rpmdev-setuptree
+
+cp /mnt/* ~/rpmbuild/SOURCES/
+yum-builddep -y /mnt/docker-registry.spec
+spectool -g -R /mnt/docker-registry.spec
+rpmbuild -ba /mnt/docker-registry.spec
