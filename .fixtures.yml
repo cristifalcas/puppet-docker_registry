@@ -1,0 +1,3 @@
+fixtures:
+  symlinks:
+    docker_registry: "#{source_dir}"
