@@ -1,7 +1,8 @@
 # docker_registry #
 
-This is the docker_registry module. It provides...
+[![Build Status](https://travis-ci.org/cristifalcas/puppet-abrt.png?branch=master)](https://travis-ci.org/cristifalcas/puppet-abrt)
 
+# to do #
 
   $db_user     = 'docker_registry'
   $db_pass     = 'docker_registry_pass'
