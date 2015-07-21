@@ -1,6 +1,6 @@
 # docker_registry #
 
-[![Build Status](https://travis-ci.org/cristifalcas/puppet-abrt.png?branch=master)](https://travis-ci.org/cristifalcas/puppet-abrt)
+[![Build Status](https://travis-ci.org/cristifalcas/puppet-docker_registry.png?branch=master)](https://travis-ci.org/cristifalcas/puppet-docker_registry)
 
 # to do #
 
