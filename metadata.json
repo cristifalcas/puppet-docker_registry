@@ -1,6 +1,6 @@
 {
 	"author": "Cristian Falcas",
-	"version": "0.9.4",
+	"version": "0.9.5",
 	"name": "optymyzepuppet-docker_registry",
 	"dependencies": [
 		{
