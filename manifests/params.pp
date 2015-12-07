@@ -4,7 +4,6 @@ class docker_registry::params {
   $config_file = '/etc/docker-distribution/registry/config.yml'
 
   $package_ensure = 'installed'
-  $service_name = 'registry'
   $service_ensure = 'running'
   $service_enable = true
 
