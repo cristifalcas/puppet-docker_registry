@@ -1,0 +1,158 @@
+version: 0.1
+log:
+  level: <%= scope['docker_registry::log_level'] %>
+  formatter: <%= scope['docker_registry::log_formatter'] %>
+<% if @log_fields then -%>
+  fields:
+<% scope['docker_registry::log_fields'].each do |key,value| -%>
+    <%= key -%>: <%= value %>
+<% end -%>
+<% end -%>
+  hooks:
+    - type: mail
+      disabled: <%= scope['docker_registry::log_hooks_mail_disabled'] %>
+<% if !@log_hooks_mail_disabled then -%>
+      levels:
+<% Array(scope['docker_registry::log_hooks_mail_levels']).each do |value| -%>
+        - <%= value %>
+<% end -%>
+      options:
+        smtp:
+          addr: <%= scope['docker_registry::log_hooks_mail_smtp_addr'] %>
+          username: <%= scope['docker_registry::log_hooks_mail_smtp_username'] %>
+          password: <%= scope['docker_registry::log_hooks_mail_smtp_password'] %>
+          insecure: <%= scope['docker_registry::log_hooks_mail_smtp_insecure'] %>
+        from: <%= scope['docker_registry::log_hooks_mail_from'] %>
+        to:
+<% Array(scope['docker_registry::log_hooks_mail_to']).each do |value| -%>
+          - <%= value %>
+<% end -%>
+<% end -%>
+
+storage:
+<% if @storage_type == 'filesystem' then -%>
+  filesystem:
+    rootdirectory: <%= scope['docker_registry::filesystem_rootdirectory'] %>
+<% elsif @storage_type == 'azure' then -%>
+  azure:
+    accountname: <%= scope['docker_registry::azure_accountname'] %>
+    accountkey: <%= scope['docker_registry::azure_accountkey'] %>
+    container: <%= scope['docker_registry::azure_container'] %>
+    realm: <%= scope['docker_registry::azure_realm'] %>
+<% elsif @storage_type == 'gcs' then -%>
+  gcs:
+    bucket: <%= scope['docker_registry::gcs_bucket'] %>
+    keyfile: <%= scope['docker_registry::gcs_keyfile'] %>
+    rootdirectory: <%= scope['docker_registry::gcs_rootdirectory'] %>
+<% elsif @storage_type == 's3' then -%>
+  s3:
+    accesskey: <%= scope['docker_registry::s3_accesskey'] %>
+    secretkey: <%= scope['docker_registry::s3_secretkey'] %>
+    region: <%= scope['docker_registry::s3_region'] %>
+    bucket: <%= scope['docker_registry::s3_bucket'] %>
+    encrypt: <%= scope['docker_registry::s3_encrypt'] %>
+    secure: <%= scope['docker_registry::s3_secure'] %>
+    v4auth: <%= scope['docker_registry::s3_v4auth'] %>
+    chunksize: <%= scope['docker_registry::s3_chunksize'] %>
+    rootdirectory: <%= scope['docker_registry::s3_rootdirectory'] %>
+<% elsif @storage_type == 'rados' then -%>
+  rados:
+    poolname: <%= scope['docker_registry::rados_poolname'] %>
+    username: <%= scope['docker_registry::rados_username'] %>
+    chunksize: <%= scope['docker_registry::rados_chunksize'] %>
+<% elsif @storage_type == 'swift' then -%>
+  swift:
+    username: <%= scope['docker_registry::swift_username'] %>
+    password: <%= scope['docker_registry::swift_password'] %>
+    authurl: <%= scope['docker_registry::swift_authurl'] %>
+    tenant: <%= scope['docker_registry::swift_tenant'] %>
+    tenantid: <%= scope['docker_registry::swift_tenantid'] %>
+    domain: <%= scope['docker_registry::swift_domain'] %>
+    domainid: <%= scope['docker_registry::swift_domainid'] %>
+    insecureskipverify: <%= scope['docker_registry::swift_insecureskipverify'] %>
+    region: <%= scope['docker_registry::swift_region'] %>
+    container: <%= scope['docker_registry::swift_container'] %>
+    rootdirectory: <%= scope['docker_registry::swift_rootdirectory'] %>
+    trustid: <%= scope['docker_registry::swift_trustid'] %>
+    chunksize: <%= scope['docker_registry::swift_chunksize'] %>
+<% end -%>
+  delete:
+    enabled: <%= scope['docker_registry::storage_delete'] %>
+<% if !@storage_redirect.nil? then -%>
+  redirect:
+    disable: <%= scope['docker_registry::storage_redirect'] %>
+<% end -%>
+<% if @storage_cache_blobdescriptor then -%>
+  cache:
+    blobdescriptor: <%= scope['docker_registry::storage_cache_blobdescriptor'] %>
+<% end -%>
+
+<% if @auth_type then -%>
+auth:
+<% if @auth_type == 'token' then -%>
+  token:
+    realm: <%= scope['docker_registry::auth_token_realm'] %>
+    service: <%= scope['docker_registry::auth_token_service'] %>
+    issuer: <%= scope['docker_registry::auth_token_issuer'] %>
+    rootcertbundle: <%= scope['docker_registry::auth_token_rootcertbundle'] %>
+<% elsif @auth_type == 'htpasswd' then -%>
+  htpasswd:
+    realm: <%= scope['docker_registry::auth_htpasswd_realm'] %>
+    path: <%= scope['docker_registry::auth_htpasswd_path'] %>
+<% end -%>
+<% end -%>
+
+http:
+  addr: <%= scope['docker_registry::http_addr'] %>
+  net: <%= scope['docker_registry::http_net'] %>
+  prefix: <%= scope['docker_registry::http_prefix'] %>
+<% if @http_host then -%>
+  host: <%= scope['docker_registry::http_host'] %>
+<% end -%>
+<% if @http_secret then -%>
+  secret: <%= scope['docker_registry::http_secret'] %>
+<% end -%>
+<% if @http_tls then -%>
+  tls:
+    certificate: <%= scope['docker_registry::http_tls_certificate'] %>
+    key: <%= scope['docker_registry::http_tls_key'] %>
+    clientcas:
+<% Array(scope['docker_registry::http_tls_clientcas']).each do |value| -%>
+      - <%= value %>
+<% end -%>
+<% end -%>
+<% if @http_debug_addr then -%>
+  debug:
+    addr: <%= scope['docker_registry::http_debug_addr'] %>
+<% end -%>
+  headers:
+<% if @log_fields then -%>
+<% scope['docker_registry::log_fields'].each do |key,value| -%>
+    <%= key -%>: <%= value %>
+<% end -%>
+<% end -%>
+
+<% if @redis_addr then -%>
+redis:
+  addr: <%= scope['docker_registry::redis_addr'] %>
+<% if @redis_password then -%>
+  password: <%= scope['docker_registry::redis_password'] %>
+<% end -%>
+  db: <%= scope['docker_registry::redis_db'] %>
+  dialtimeout: <%= scope['docker_registry::redis_dialtimeout'] %>
+  readtimeout: <%= scope['docker_registry::redis_readtimeout'] %>
+  writetimeout: <%= scope['docker_registry::redis_writetimeout'] %>
+  pool:
+    maxidle: <%= scope['docker_registry::redis_pool_maxidle'] %>
+    maxactive: <%= scope['docker_registry::redis_pool_maxactive'] %>
+    idletimeout: <%= scope['docker_registry::redis_pool_idletimeout'] %>
+<% end -%>
+
+<% if @proxy_remoteurl then -%>
+proxy:
+  remoteurl: <%= scope['docker_registry::proxy_remoteurl'] %>
+<% if @proxy_username and @proxy_password then -%>
+  username: <%= scope['docker_registry::proxy_username'] %>
+  password: <%= scope['docker_registry::proxy_password'] %>
+<% end -%>
+<% end -%>

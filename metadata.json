@@ -1,31 +1,10 @@
 {
+	"name": "cristifalcas-docker_registry",
+	"version": "2.0.0",
 	"author": "Cristian Falcas",
-	"version": "0.9.5",
-	"name": "optymyzepuppet-docker_registry",
-	"dependencies": [
-		{
+	"dependencies": [{
 			"name": "puppetlabs/stdlib",
 			"version_requirement": "4.x"
-		},
-		{
-			"name": "puppetlabs/concat",
-			"version_requirement": "1.x"
-		},
-		{
-			"name": "puppetlabs/firewall",
-			"version_requirement": "1.x"
-		},
-		{
-			"name": "puppetlabs/apache",
-			"version_requirement": "1.x"
-		},
-		{
-			"name": "jfryman/nginx",
-			"version_requirement": "0.x"
-		},
-		{
-			"name": "leinaddm/htpasswd",
-			"version_requirement": "0.x"
 		}
 	],
 	"license": "Apache-2.0",
@@ -34,5 +13,46 @@
 	"requirements": [],
 	"source": "git@github.com:cristifalcas/puppet-docker_registry.git",
 	"summary": "installs and configures docker registry",
-	"tags": []
+	"tags": [ "docker_registry",
+		"docker_distribution"
+	],
+	"operatingsystem_support": [{
+			"operatingsystem": "RedHat",
+			"operatingsystemrelease": [ "6",
+				"7"
+			]
+		},{
+			"operatingsystem": "CentOS",
+			"operatingsystemrelease": [ "6",
+				"7"
+			]
+		},{
+			"operatingsystem": "OracleLinux",
+			"operatingsystemrelease": [ "6",
+				"7"
+			]
+		},{
+			"operatingsystem": "Scientific",
+			"operatingsystemrelease": [ "6",
+				"7"
+			]
+		},{
+			"operatingsystem": "Fedora",
+			"operatingsystemrelease": [ "6",
+				"21"
+			]
+		},{
+			"operatingsystem": "OpenSuSE",
+			"operatingsystemrelease": [ "13"
+			]
+		}
+	],
+	"requirements": [{
+			"name": "pe",
+			"version_requirement": "3.4"
+		},{
+			"name": "puppet",
+			"version_requirement": "3.4"
+		}
+	]
 }

@@ -2,27 +2,18 @@
 
 [![Build Status](https://travis-ci.org/cristifalcas/puppet-docker_registry.png?branch=master)](https://travis-ci.org/cristifalcas/puppet-docker_registry)
 
-# to do #
+Puppet module for installing, configuring and managing [Docker Registry 2.0](https://github.com/docker/distribution)
 
-  $db_user     = 'docker_registry'
-  $db_pass     = 'docker_registry_pass'
-  $db_name     = 'docker_registry_index'
-  $db_hostname = 'localhost'
 
-  include postgresql::server
 
-  postgresql::server::db { $db_name:
-    user     => $db_user,
-    password => postgresql_password($db_user, $db_pass),
-  }
+## Support
 
-  include mysql::server
+This module is currently only for RedHat clones 6.x, 7.x and OpenSuSE:
 
-  class { 'mysql::bindings': python_enable => true } ->
-  mysql_database { $db_name: ensure => present, } ->
-  mysql_user { "${db_user}@${db_hostname}": password_hash => mysql_password($db_pass), } ->
-  mysql_grant { "${db_user}@${db_hostname}/${db_name}.*":
-    privileges => 'ALL',
-    table      => "${db_name}.*",
-    user       => "${db_user}@${db_hostname}",
-  }
+
+The Docker toolset to pack, ship, store, and deliver content.
+
+## Usage:
+
+    include docker_registry
+

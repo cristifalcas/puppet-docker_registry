@@ -1,47 +1,105 @@
 class docker_registry::params {
-  $package_ensure        = 'installed'
-  $port                  = 5000
-  $adress                = '0.0.0.0'
-  $nr_threads            = $::processorcount
-  $default_flavor        = 'dev'
+  $package_name = 'docker-distribution-registry'
+  $service_name = 'registry'
+  $config_file = '/etc/docker-distribution/registry/config.yml'
 
-  $loglevel              = 'info'
-  $debug                 = false
-  $standalone            = true
-  $endpoint              = 'https://index.docker.io'
-  $enable_ssl            = true
+  $package_ensure = 'installed'
+  $service_name = 'registry'
+  $service_ensure = 'running'
+  $service_enable = true
 
-  $search_database       = 'sqlite'
-  $db_name               = 'docker_registry_index'
-  $db_user               = 'docker_registry'
-  $db_pass               = 'docker_registry_pass'
-  $db_hostname           = 'localhost'
-  $db_port               = undef
-  $sqlite_path           = "/var/lib/docker-registry/${db_name}.db"
+  $log_level = 'info'
+  $log_formatter = 'text'
+  $log_fields = undef
 
-  $mirror_source         = 'https://registry-1.docker.io'
-  $mirror_source_index   = 'https://index.docker.io'
-  $mirror_tags_cache_ttl = 172800
+  $log_hooks_mail_disabled = true
+  $log_hooks_mail_levels = ['panic']
+  $log_hooks_mail_smtp_addr = "smtp.${::domain}:25"
+  $log_hooks_mail_smtp_username = 'mailuser'
+  $log_hooks_mail_smtp_password = 'mailpass'
+  $log_hooks_mail_smtp_insecure = true
+  $log_hooks_mail_from = "docker-registry@${::fqdn}"
+  $log_hooks_mail_to = []
 
-  $redis_hostname        = undef
-  $redis_port            = 6379
-  $redis_db              = 0
-  $redis_pass            = 'mysecretpassword'
+  $storage_type = 'filesystem'
+  $filesystem_rootdirectory = '/var/lib/registry'
 
-  $lru_redis_hostname    = undef
-  $lru_redis_port        = 6379
-  $lru_redis_db          = 0
-  $lru_redis_pass        = 'mysecretpassword'
+  $azure_accountname = 'accountname'
+  $azure_accountkey = 'base64encodedaccountkey'
+  $azure_container = 'containername'
+  $azure_realm = 'core.windows.net'
 
-  $smtp_hostname         = 'localhost'
-  $smtp_port             = 25
-  $smtp_login            = undef
-  $smtp_pass             = undef
-  $smtp_secure           = false
-  $smtp_from_address     = "docker-registry@${::fqdn}"
-  $smtp_to_address       = 'root@localhost'
+  $gcs_bucket = 'bucketname'
+  $gcs_keyfile = '/path/to/keyfile'
+  $gcs_rootdirectory = '/gcs/object/name/prefix'
 
-  $ssl_port              = 443
-  $auth_user             = undef
-  $auth_pass             = undef
+  $s3_accesskey = 'awsaccesskey'
+  $s3_secretkey = 'awssecretkey'
+  $s3_region = 'us-west-1'
+  $s3_bucket = 'bucketname'
+  $s3_encrypt = true
+  $s3_secure = true
+  $s3_v4auth = true
+  $s3_chunksize = '5242880'
+  $s3_rootdirectory = '/s3/object/name/prefix'
+
+  $rados_poolname = 'radospool'
+  $rados_username = 'radosuser'
+  $rados_chunksize = '4194304'
+
+  $swift_username = 'username'
+  $swift_password = 'password'
+  $swift_authurl = 'https://storage.myprovider.com/auth/v1.0 or https://storage.myprovider.com/v2.0 or https://storage.myprovider.com/v3/auth'
+  $swift_tenant = 'tenantname'
+  $swift_tenantid = 'tenantid'
+  $swift_domain = 'domain name for Openstack Identity v3 API'
+  $swift_domainid = 'domain id for Openstack Identity v3 API'
+  $swift_insecureskipverify = true
+  $swift_region = 'fr'
+  $swift_container = 'containername'
+  $swift_rootdirectory = '/swift/object/name/prefix'
+  $swift_trustid = 'swift_trustid'
+  $swift_chunksize = '5M'
+
+  $storage_delete = false
+  $storage_redirect = false
+  $storage_cache_blobdescriptor = 'inmemory'
+
+  $auth_type = undef
+
+  $auth_token_realm = 'token-realm'
+  $auth_token_service = 'token-service'
+  $auth_token_issuer = 'registry-token-issuer'
+  $auth_token_rootcertbundle = '/root/certs/bundle'
+
+  $auth_htpasswd_realm = 'basic-realm'
+  $auth_htpasswd_path = '/path/to/htpasswd'
+
+  $http_addr = 'localhost:5000'
+  $http_net = 'tcp'
+  $http_prefix = '/'
+  $http_host = undef
+  $http_secret = undef
+  $http_tls = false
+  $http_tls_certificate = "${::settings::ssldir}/certs/${::clientcert}.pem"
+  $http_tls_key = "${::settings::ssldir}/private_keys/${::clientcert}.pem"
+  $http_tls_clientcas = "${::settings::ssldir}/certs/ca.pem"
+  $http_debug_addr = 'localhost:5001'
+  $http_headers = {
+    'X-Content-Type-Options' => '[nosniff]'
+  }
+
+  $redis_addr = undef
+  $redis_password = undef
+  $redis_db = '0'
+  $redis_dialtimeout = '10ms'
+  $redis_readtimeout = '10ms'
+  $redis_writetimeout = '10ms'
+  $redis_pool_maxidle = '16'
+  $redis_pool_maxactive = '64'
+  $redis_pool_idletimeout = '300s'
+
+  $proxy_remoteurl = undef
+  $proxy_username = undef
+  $proxy_password = undef
 }

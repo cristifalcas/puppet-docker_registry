@@ -1,6 +1,0 @@
-<%= @name %>: &<%= @name %>
-    <<: *<%= @include_config %>
-    storage: <%= @storage -%>
-<% if @storage_alternate then -%>
-    storage_alternate: <%= @storage_alternate %>
-<% end -%>

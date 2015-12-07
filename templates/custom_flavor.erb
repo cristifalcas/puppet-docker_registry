@@ -1,8 +1,0 @@
-
-<%= @name %>:<% if defined?@exportable and @exportable then -%> &<%= @name %><% end %>
-<% if defined?@include_config then -%>
-    <<: *<%= @include_config %>
-<% end -%>
-<%- @options.keys.sort.each do |k| -%>
-    <%= k %>: <%= @options[k] %>
-<%- end -%>
