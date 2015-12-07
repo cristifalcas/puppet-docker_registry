@@ -116,18 +116,20 @@ http:
   tls:
     certificate: <%= scope['docker_registry::http_tls_certificate'] %>
     key: <%= scope['docker_registry::http_tls_key'] %>
+<% if @http_tls_clientcas then -%>
     clientcas:
 <% Array(scope['docker_registry::http_tls_clientcas']).each do |value| -%>
       - <%= value %>
+<% end -%>
 <% end -%>
 <% end -%>
 <% if @http_debug_addr then -%>
   debug:
     addr: <%= scope['docker_registry::http_debug_addr'] %>
 <% end -%>
+<% if @http_headers then -%>
   headers:
-<% if @log_fields then -%>
-<% scope['docker_registry::log_fields'].each do |key,value| -%>
+<% scope['docker_registry::http_headers'].each do |key,value| -%>
     <%= key -%>: <%= value %>
 <% end -%>
 <% end -%>

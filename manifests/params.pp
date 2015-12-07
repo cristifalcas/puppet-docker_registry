@@ -1,7 +1,19 @@
 class docker_registry::params {
-  $package_name = 'docker-distribution-registry'
-  $service_name = 'registry'
-  $config_file = '/etc/docker-distribution/registry/config.yml'
+  case $::osfamily {
+    redhat  : {
+      $package_name = 'docker-distribution'
+      $service_name = 'docker-distribution'
+      $config_file  = '/etc/docker-distribution/registry/config.yml'
+    }
+    suse    : {
+      $package_name = 'docker-distribution-registry'
+      $service_name = 'registry'
+      $config_file  = '/etc/registry/config.yml'
+    }
+    default : {
+      fail("Distribution not supported: ${::osfamily}.")
+    }
+  }
 
   $package_ensure = 'installed'
   $service_ensure = 'running'
@@ -82,7 +94,7 @@ class docker_registry::params {
   $http_tls = false
   $http_tls_certificate = "${::settings::ssldir}/certs/${::clientcert}.pem"
   $http_tls_key = "${::settings::ssldir}/private_keys/${::clientcert}.pem"
-  $http_tls_clientcas = "${::settings::ssldir}/certs/ca.pem"
+  $http_tls_clientcas = undef
   $http_debug_addr = 'localhost:5001'
   $http_headers = {
     'X-Content-Type-Options' => '[nosniff]'

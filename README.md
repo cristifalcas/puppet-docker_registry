@@ -15,5 +15,21 @@ The Docker toolset to pack, ship, store, and deliver content.
 
 ## Usage:
 
-    include docker_registry
+          include docker_registry
+
+### Use tls (it will use puppet certificates) and enable email hooks:
+
+	  class { '::docker_registry':
+	    log_fields               => {
+	      service     => 'registry',
+	      environment => 'production'
+	    }
+	    ,
+	    log_hooks_mail_disabled  => false,
+	    log_hooks_mail_levels    => ['panic', 'error'],
+	    log_hooks_mail_to        => 'oz-cloud-ops@optymyze.com',
+	    filesystem_rootdirectory => '/srv/registry',
+	    http_addr                => ':1443',
+	    http_tls                 => true,
+	  }
 
