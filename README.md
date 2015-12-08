@@ -27,7 +27,7 @@ The Docker toolset to pack, ship, store, and deliver content.
 	    ,
 	    log_hooks_mail_disabled  => false,
 	    log_hooks_mail_levels    => ['panic', 'error'],
-	    log_hooks_mail_to        => 'oz-cloud-ops@optymyze.com',
+	    log_hooks_mail_to        => 'docker_registry@company.com',
 	    filesystem_rootdirectory => '/srv/registry',
 	    http_addr                => ':1443',
 	    http_tls                 => true,
