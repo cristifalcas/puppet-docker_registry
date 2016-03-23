@@ -189,6 +189,7 @@
 # [*swift_chunksize*]
 #    Size of the data segments for the Swift Dynamic Large Objects. This value should be a number (defaults to 5M). 
 #
+####
 # [*storage_delete*]
 #   Use the delete subsection to enable the deletion of image blobs and manifests by digest.
 #   It defaults to false
@@ -281,6 +282,29 @@
 #   and the parameter value a list of the header's payload values.
 #   Including X-Content-Type-Options: [nosniff] is recommended, so that browsers will not interpret content as HTML
 #   if they are directed to load a page from the registry. This header is included in the example configuration files.
+#
+#
+# [*notifications_name*]
+#    A human readable name for the service. 
+#
+# [*notifications_disabled*]
+#    A boolean to enable/disable notifications for a service. 
+#
+# [*notifications_url*]
+#    The URL to which events should be published. 
+#
+# [*notifications_headers*]
+#    Static headers to add to each request. Each header's name should be a key underneath headers, and each value is a list
+#    of payloads for that header name. Note that values must always be lists. 
+#
+# [*notifications_timeout*]
+#    An HTTP timeout value. This field takes a positive integer and an optional suffix indicating the unit of time.
+#
+# [*notifications_threshold*]
+#    An integer specifying how long to wait before backing off a failure. 
+#
+# [*notifications_backoff*]
+#    How long the system backs off before retrying. This field takes a positive integer and an optional suffix indicating the unit of time.
 #
 # [*redis_addr*]
 #    Address (host and port) of redis instance. 
@@ -391,6 +415,13 @@ class docker_registry (
   $http_tls_clientcas           = $::docker_registry::params::http_tls_clientcas,
   $http_debug_addr              = $::docker_registry::params::http_debug_addr,
   $http_headers                 = $::docker_registry::params::http_headers,
+  $notifications_name           = $::docker_registry::params::notifications_name,
+  $notifications_disabled       = $::docker_registry::params::notifications_disabled,
+  $notifications_url            = $::docker_registry::params::notifications_url,
+  $notifications_headers        = $::docker_registry::params::notifications_headers,
+  $notifications_timeout        = $::docker_registry::params::notifications_timeout,
+  $notifications_threshold      = $::docker_registry::params::notifications_threshold,
+  $notifications_backoff        = $::docker_registry::params::notifications_backoff,
   $redis_addr                   = $::docker_registry::params::redis_addr,
   $redis_password               = $::docker_registry::params::redis_password,
   $redis_db                     = $::docker_registry::params::redis_db,

@@ -100,6 +100,14 @@ class docker_registry::params {
     'X-Content-Type-Options' => '[nosniff]'
   }
 
+  $notifications_name = $::fqdn
+  $notifications_disabled = false
+  $notifications_url = undef
+  $notifications_headers = undef
+  $notifications_timeout = 500
+  $notifications_threshold = 5
+  $notifications_backoff = 1000
+
   $redis_addr = undef
   $redis_password = undef
   $redis_db = '0'

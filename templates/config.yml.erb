@@ -4,7 +4,7 @@ log:
   formatter: <%= scope['docker_registry::log_formatter'] %>
 <% if @log_fields then -%>
   fields:
-<% scope['docker_registry::log_fields'].each do |key,value| -%>
+<% scope['docker_registry::log_fields'].sort.each do |key,value| -%>
     <%= key -%>: <%= value %>
 <% end -%>
 <% end -%>
@@ -13,7 +13,7 @@ log:
       disabled: <%= scope['docker_registry::log_hooks_mail_disabled'] %>
 <% if !@log_hooks_mail_disabled then -%>
       levels:
-<% Array(scope['docker_registry::log_hooks_mail_levels']).each do |value| -%>
+<% Array(scope['docker_registry::log_hooks_mail_levels']).sort.each do |value| -%>
         - <%= value %>
 <% end -%>
       options:
@@ -24,7 +24,7 @@ log:
           insecure: <%= scope['docker_registry::log_hooks_mail_smtp_insecure'] %>
         from: <%= scope['docker_registry::log_hooks_mail_from'] %>
         to:
-<% Array(scope['docker_registry::log_hooks_mail_to']).each do |value| -%>
+<% Array(scope['docker_registry::log_hooks_mail_to']).sort.each do |value| -%>
           - <%= value %>
 <% end -%>
 <% end -%>
@@ -118,7 +118,7 @@ http:
     key: <%= scope['docker_registry::http_tls_key'] %>
 <% if @http_tls_clientcas then -%>
     clientcas:
-<% Array(scope['docker_registry::http_tls_clientcas']).each do |value| -%>
+<% Array(scope['docker_registry::http_tls_clientcas']).sort.each do |value| -%>
       - <%= value %>
 <% end -%>
 <% end -%>
@@ -129,9 +129,23 @@ http:
 <% end -%>
 <% if @http_headers then -%>
   headers:
-<% scope['docker_registry::http_headers'].each do |key,value| -%>
+<% scope['docker_registry::http_headers'].sort.each do |key,value| -%>
     <%= key -%>: <%= value %>
 <% end -%>
+<% end -%>
+
+<% if @notifications_url then -%>
+notifications:
+  endpoints:
+    - name: <%= scope['docker_registry::notifications_name'] %>
+      disabled: <%= scope['docker_registry::notifications_disabled'] %>
+      url: <%= scope['docker_registry::notifications_url'] %>
+<% if @notifications_headers then -%>
+      headers: <%= scope['docker_registry::notifications_headers'] %>
+<% end -%>
+      timeout: <%= scope['docker_registry::notifications_timeout'] %>
+      threshold: <%= scope['docker_registry::notifications_threshold'] %>
+      backoff: <%= scope['docker_registry::notifications_backoff'] %>
 <% end -%>
 
 <% if @redis_addr then -%>
