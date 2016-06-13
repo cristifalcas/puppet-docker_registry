@@ -33,3 +33,10 @@ The Docker toolset to pack, ship, store, and deliver content.
 	    http_tls                 => true,
 	  }
 
+## Journald forward:
+
+The class support a parameter called journald_forward_enable.
+
+This was added because of the PIPE signal that is sent to go programs when systemd-journald dies.
+
+For more information read here: https://github.com/projectatomic/forward-journald

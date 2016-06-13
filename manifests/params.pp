@@ -18,6 +18,7 @@ class docker_registry::params {
   $package_ensure = 'installed'
   $service_ensure = 'running'
   $service_enable = true
+  $journald_forward_enable = false
 
   $log_level = 'info'
   $log_formatter = 'text'
