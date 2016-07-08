@@ -450,6 +450,4 @@ class docker_registry (
   Class['docker_registry::install'] ->
   Class['docker_registry::config'] ~>
   Class['docker_registry::service']
-
-  include profile_base
 }
