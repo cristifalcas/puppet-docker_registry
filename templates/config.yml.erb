@@ -19,8 +19,10 @@ log:
       options:
         smtp:
           addr: <%= scope['docker_registry::log_hooks_mail_smtp_addr'] %>
+<% if @log_hooks_mail_smtp_username and @log_hooks_mail_smtp_password then -%>
           username: <%= scope['docker_registry::log_hooks_mail_smtp_username'] %>
           password: <%= scope['docker_registry::log_hooks_mail_smtp_password'] %>
+<% end -%>
           insecure: <%= scope['docker_registry::log_hooks_mail_smtp_insecure'] %>
         from: <%= scope['docker_registry::log_hooks_mail_from'] %>
         to:
