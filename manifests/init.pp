@@ -26,6 +26,10 @@
 #   Whether you want to kube daemons to start up at boot
 #   Defaults to true
 #
+# [*journald_forward_enable*]
+#   Fix for SIGPIPE sent to registry daemon during journald restart
+#   Defaults to false
+#
 # [*log_level*]
 #   Sets the sensitivity of logging output. Permitted values are error, warn, info and debug.
 #   The default is info. 
@@ -349,6 +353,7 @@ class docker_registry (
   $service_name                 = $::docker_registry::params::service_name,
   $service_ensure               = $::docker_registry::params::service_ensure,
   $service_enable               = $::docker_registry::params::service_enable,
+  $journald_forward_enable      = $::docker_registry::params::journald_forward_enable,
   $log_level                    = $::docker_registry::params::log_level,
   $log_formatter                = $::docker_registry::params::log_formatter,
   $log_fields                   = $::docker_registry::params::log_fields,
@@ -435,7 +440,7 @@ class docker_registry (
   $proxy_username               = $::docker_registry::params::proxy_username,
   $proxy_password               = $::docker_registry::params::proxy_password,
 ) inherits docker_registry::params {
-  validate_bool($log_hooks_mail_disabled, $storage_delete, $storage_redirect)
+  validate_bool($log_hooks_mail_disabled, $storage_delete, $storage_redirect, $journald_forward_enable)
   if !$log_hooks_mail_disabled and empty($log_hooks_mail_to) {fail("log_hooks_mail_to parameter can't be empty")}
   validate_re($log_level, '^(error|warn|info|debug)$')
   validate_re($log_formatter, '^(text|json|logstash)$')

@@ -10,7 +10,6 @@ Puppet module for installing, configuring and managing [Docker Registry 2.0](htt
 
 This module is currently only for RedHat clones 6.x, 7.x and OpenSuSE:
 
-
 The Docker toolset to pack, ship, store, and deliver content.
 
 ## Usage:
@@ -33,3 +32,15 @@ The Docker toolset to pack, ship, store, and deliver content.
 	    http_tls                 => true,
 	  }
 
+## Journald forward:
+
+The class support a parameter called journald_forward_enable.
+
+This was added because of the PIPE signal that is sent to go programs when systemd-journald dies.
+
+For more information read here: https://github.com/projectatomic/forward-journald
+
+### Usage:
+
+	  include ::forward_journald
+	  Class['forward_journald'] -> Class['docker_registry']
