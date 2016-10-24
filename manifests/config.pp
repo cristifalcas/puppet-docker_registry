@@ -5,7 +5,6 @@ class docker_registry::config (
   $storage_type = $::docker_registry::storage_type,
   $storage_cache_blobdescriptor = $::docker_registry::storage_cache_blobdescriptor,
   $auth_type = $::docker_registry::auth_type,
-  $auth_type = $::docker_registry::auth_type,
   $http_host = $::docker_registry::http_host,
   $http_secret = $::docker_registry::http_secret,
   $http_tls = $::docker_registry::http_tls,
