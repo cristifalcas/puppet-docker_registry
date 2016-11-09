@@ -1,5 +1,9 @@
 # docker_registry #
 
+# THIS MODULE WAS RENAMED DOCKER_DISTRIBUTION #
+# YOU CAN FIND THE NEW MODULE AT #
+# https://github.com/cristifalcas/puppet-docker_distribution #
+
 [![Build Status](https://travis-ci.org/cristifalcas/puppet-docker_registry.png?branch=master)](https://travis-ci.org/cristifalcas/puppet-docker_registry)
 
 Puppet module for installing, configuring and managing [Docker Registry 2.0](https://github.com/docker/distribution)
